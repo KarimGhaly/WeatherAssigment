@@ -45,15 +45,10 @@ public class MyAdapter extends PagerAdapter{
         TextView itemTxtWind = (TextView) view.findViewById(R.id.itemTxtWind);
         TextView itemTxtHumadity = (TextView) view.findViewById(R.id.itemTxtHumadity);
         ImageView itemIcon = (ImageView) view.findViewById(R.id.itemIcon);
-        Log.d(TAG, "instantiateItem: Checked");
         itemTxtDate.setText(weatherClass.getList().get(position).getDtTxt());
-        Log.d(TAG, "instantiateItem: "+itemTxtDate.getText().toString());
-        itemTxtTemp.setText("Temp: "+String.valueOf(weatherClass.getList().get(position).getMain().getTemp()));
-        Log.d(TAG, "instantiateItem: "+itemTxtTemp.getText().toString());
-        itemTxtWind.setText("Wind Speed: "+String.valueOf(weatherClass.getList().get(position).getWind().getSpeed()));
-        Log.d(TAG, "instantiateItem: "+itemTxtWind.getText().toString());
+        itemTxtTemp.setText("Temp: "+String.valueOf(weatherClass.getList().get(position).getMain().getTemp())+" F");
+        itemTxtWind.setText("Wind Speed: "+String.valueOf(weatherClass.getList().get(position).getWind().getSpeed())+" mph");
         itemTxtHumadity.setText("Humidity: "+String.valueOf(weatherClass.getList().get(position).getMain().getHumidity()) + " %");
-        Log.d(TAG, "instantiateItem: "+itemTxtHumadity.getText().toString());
         String ImageURL = "http://openweathermap.org/img/w/"+weatherClass.getList().get(position).getWeather().get(0).getIcon() +".png";
         Glide.with(context).load(ImageURL).into(itemIcon);
 

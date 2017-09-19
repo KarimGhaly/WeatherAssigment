@@ -17,23 +17,24 @@ import retrofit2.http.Query;
  */
 
 public class RetrofitHelper {
-    public static String BASE_URL = "http://samples.openweathermap.org/data/2.5/";
+    public static String BASE_URL = "http://api.openweathermap.org/data/2.5/";
 
     public static Retrofit create(){
         Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
         return retrofit;
     }
 
-    public static Call<WeatherClass> getWeatherDetails(String ZipCode,String AppId)
+    public static Call<WeatherClass> getWeatherDetails(String ZipCode,String AppId,String Units)
     {
         Retrofit retrofit = create();
         APIServices apiServices = retrofit.create(APIServices.class);
-        return  apiServices.getWeather(ZipCode,AppId);
+        return  apiServices.getWeather(ZipCode,AppId,Units);
     }
 
 
     interface APIServices{
-        @GET ("forecast?zip&APPID")
-        Call<WeatherClass>  getWeather(@Query("zip") String ZIPCode, @Query("APPID") String AppID);
+        @GET ("forecast")
+        Call<WeatherClass>  getWeather(@Query("zip") String ZIPCode, @Query("APPID") String AppID,@Query("units") String Units);
+
     }
 }
