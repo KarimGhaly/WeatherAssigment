@@ -5,6 +5,8 @@ import com.example.admin.weatherassigment.model.WeatherClass;
 
 import java.util.List;
 
+import okhttp3.OkHttpClient;
+import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -20,7 +22,11 @@ public class RetrofitHelper {
     public static String BASE_URL = "http://api.openweathermap.org/data/2.5/";
 
     public static Retrofit create(){
-        Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).build();
+        OkHttpClient.Builder client = new OkHttpClient.Builder();
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor();
+        client.addInterceptor(loggingInterceptor);
+        loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
+        Retrofit retrofit = new Retrofit.Builder().baseUrl(BASE_URL).addConverterFactory(GsonConverterFactory.create()).client(client.build()).build();
         return retrofit;
     }
 

@@ -33,10 +33,6 @@ public class MainActivity extends AppCompatActivity {
         txtCity = (TextView) findViewById(R.id.txtCity);
         txtCountry = (TextView) findViewById(R.id.txtCountry);
         etZipCode = (EditText) findViewById(R.id.txtZIPCode);
-
-
-
-
     }
 
     public void SearchWeather(View view) {
